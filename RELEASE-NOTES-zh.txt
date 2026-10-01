@@ -1,21 +1,22 @@
-v1.0.0 发布说明 / Release Notes
+v1.5.1 发布说明 / Release Notes
 ================================
 
 一、发布物（两个，按需下载）
 ----------------------------
-1) OfflineFileTool-v1.0.0.exe            10.3 MB   单文件便携版
-   · 音频格式转换需要用户自备 FFmpeg：放到本程序同级的 ffmpeg\bin\ 目录，或加入 PATH。
-   · 其余功能（重命名 / 图片 / PDF / 图片水印）开箱可用。
-   SHA-256: 8a247cced2d3576a820d053aec4cb1cc06eb6ce3fa64bceeeac33103f790b55e
+1) OfflineFileTool-v1.5.1.exe            约 10 MB   单文件便携版
+   · 批量重命名 / 图片压缩转换 / PDF 合并拆分 / 图片水印 开箱可用。
+   · 音频格式转换需要自备 FFmpeg：放到本程序同级的 ffmpeg\bin\ 目录，或加入 PATH。
+   · **老用户升级只需换这一个文件**：把新的 exe 覆盖进去，ffmpeg 目录保持不动即可。
+   SHA-256: a072da060e378bf9e4d48c16417c49fb4d59e93012fdad0353c5767e29dddeb2
 
-2) OfflineFileTool-v1.0.0-full.zip      169.0 MB   完整版（已内置音频组件，解压即用）
-   · 解压得到 OfflineFileTool-v1.0.0-full 目录，双击其中的 exe 即可运行，免安装。
+2) OfflineFileTool-v1.5.1-full.zip       约 169 MB   完整版（已内置音频组件，解压即用）
+   · 解压得到 OfflineFileTool-v1.5.1-full 目录，双击其中的 exe 即可运行，免安装。
    · 内置 FFmpeg 9.0.1 full build（GPL v3）的 ffmpeg.exe 与 ffprobe.exe。
-   SHA-256: a2c58be3cc4769b8b4d1a4fd410a70171efdea0d79477b2e44c083dfecc0a364
+   SHA-256: c487ef88eaf73a1f6bda2a113411c5b78c89486331b9840b96cd07cf9da7b600
 
 完整版 ZIP 内部结构：
-    OfflineFileTool-v1.0.0-full/
-      OfflineFileTool-v1.0.0.exe        主程序
+    OfflineFileTool-v1.5.1-full/
+      OfflineFileTool-v1.5.1.exe        主程序
       ffmpeg/bin/ffmpeg.exe             音频转码组件（FFmpeg 9.0.1 full build, GPL v3）
       ffmpeg/bin/ffprobe.exe            音频信息读取组件
       LICENSES/LICENSE-mit.txt          本软件授权（MIT，作者 WillYin）
@@ -24,15 +25,27 @@ v1.0.0 发布说明 / Release Notes
       README-zh.txt                     使用说明（中文，含 SmartScreen 提示）
       SHA256SUMS.txt                    三个可执行文件的 SHA-256
 
-二、GitHub 上传方式（重要）
----------------------------
-· 仓库内容（源码 / ui / scripts / packaging / 说明文档）：直接提交，见本 _upload 目录。
+> 两个发布物里的主程序是**同一个文件**（逐字节相同）。完整版只是额外附带 ffmpeg 组件。
+> 因此已装完整版的用户升级时，下载 10 MB 的精简版覆盖旧 exe 即可，无需重下 169 MB。
+
+二、本版内容
+------------
+· 五个模块：批量重命名、图片压缩/转换（含 HEIC 输入）、PDF 合并/拆分、图片水印、音频格式转换
+· 音频转换支持 11 种目标格式：MP3 / WAV / FLAC / AAC(M4A) / OGG / ALAC / Opus / WMA / AMR-NB / AC3 / WavPack
+  （APE 仅可解码，界面中已停用）
+· 浅色 / 深色主题，首次运行跟随系统，切换后记住选择
+· 5 种界面语言：简体中文 / 繁體中文 / English / 日本語 / 한국어
+· 完全离线：无网络请求代码、无统计、不上传任何文件
+
+三、GitHub 上传方式（维护者参考）
+---------------------------------
+· 仓库内容（源码 / ui / scripts / packaging / 文档）：直接上传，见同目录 _upload 快照。
 · 二进制（两个 exe 与完整版 ZIP）：作为 **Release 资产** 上传。
-  原因：GitHub 仓库单文件上限 100 MB，而完整版 ZIP 为 169 MB、ffmpeg.exe 为 212 MB，
-  提交进仓库会直接失败；Release 资产单文件上限 2 GB，适合放二进制。
+  原因：GitHub 仓库单文件上限 100 MB（网页拖拽上传约 25 MB），而完整版 ZIP 为 169 MB；
+  Release 资产单文件上限 2 GB，适合放二进制。
 · 仓库 .gitignore 已排除 /dist 与 /ffmpeg，请勿把 400+ MB 的二进制提交进 Git 历史。
 
-三、许可证合规（随附 FFmpeg 时必读）
+四、许可证合规（随附 FFmpeg 时必读）
 ------------------------------------
 · 随附的 FFmpeg 启用了 --enable-gpl --enable-version3，即 **GPL v3** 构建。
 · 它以独立可执行程序的形式随包分发，由主程序以命令行方式调用，**未链接进主程序**，
@@ -41,15 +54,17 @@ v1.0.0 发布说明 / Release Notes
 · 切勿将 FFmpeg 静态链接进主程序 —— 那样整个软件必须按 GPL 发布，MIT 授权将被覆盖。
 · 用户在包内可自行替换 ffmpeg/bin 下的可执行文件，满足 GPL 的可替换性要求。
 
-四、复现打包
+五、复现打包
 ------------
-    pwsh -File scripts/package-release.ps1
-脚本会重新生成暂存目录与 ZIP，复制 LICENSE / 说明文档 / GPL-3.0 全文，生成 SHA256SUMS.txt，
-并对 GPLv3 抬头与结尾做校验、解压后实跑 ffmpeg -version 与 ffprobe -version 自检。
+    pwsh -File scripts\finalize.ps1          # 测试 + 检查 + 构建 + 生成 dist 内 exe
+    pwsh -File scripts\package-release.ps1   # 生成完整版 ZIP（版本号自动取自 tauri.conf.json）
 
-五、已知提示
+package-release.ps1 会复制主程序与组件、写入带 BOM 的 UTF-8 说明、校验 GPLv3 正文、
+生成 SHA256SUMS.txt、打 ZIP，并解压后实跑 ffmpeg -version / ffprobe -version 自检。
+
+六、已知提示
 ------------
 · 未购买代码签名证书，首次运行会出现 SmartScreen "Windows 已保护你的电脑"提示，
   需点"更多信息 → 仍要运行"；README-zh.txt 中已说明。
 · 需要系统具备 WebView2 运行时（Win11 / 较新 Win10 已内置）。
-· 完整版 ZIP 解压后约 434 MB，建议解压到非系统盘。
+· 完整版解压后约 434 MB，建议解压到非系统盘。

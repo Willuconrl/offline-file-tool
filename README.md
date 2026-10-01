@@ -50,7 +50,7 @@ APE 为「仅可解码」（FFmpeg 无 APE 编码器），界面中已停用。
 
 音频格式转换依赖外部的 `ffmpeg.exe` 与 `ffprobe.exe`。**其余四个模块不需要它。** 两种获取方式：
 
-1. **下载完整版发布包**（推荐给普通用户）：`OfflineFileTool-v1.0.0-full.zip`，内已含组件，解压即用。
+1. **下载完整版发布包**（推荐给普通用户）：`OfflineFileTool-v1.5.1-full.zip`，内已含组件，解压即用。
 2. **自行下载**：从 <https://www.gyan.dev/ffmpeg/builds/> 获取 FFmpeg Windows 构建，把 `ffmpeg.exe`、`ffprobe.exe`
    放到主程序同级的 `ffmpeg\bin\` 目录，或加入系统 `PATH`。
 
@@ -102,6 +102,7 @@ node scripts\check-theme.js          # 深浅色主题接线（防闪屏脚本�
 node scripts\check-theme-vars.js     # CSS 变量完整性（深色下是否有未覆盖的颜色）
 node scripts\check-perf.js           # 性能优化是否被回退（事件委托/帧合并/长列表）
 node scripts\check-delegation.js     # 列表事件委托是否覆盖所有可点击控件（带自检）
+node scripts\check-version.js        # 版本号一致性（配置 / Cargo.toml / 关于页 / 文档）
 node scripts\audit-exe.js            # 隐私审计：检查 exe 中是否残留构建机用户名/路径
 ```
 
@@ -151,8 +152,8 @@ file-toolbox/
 | 发布物 | 体积 | 说明 |
 | --- | --- | --- |
 | `file-toolbox.exe` | 约 10 MB | 绿色单文件；音频功能需用户自备 ffmpeg |
-| `OfflineFileTool-v1.0.0.exe` | 约 10 MB | 同上，带版本号的发布名 |
-| `OfflineFileTool-v1.0.0-full.zip` | 约 169 MB | **完整版**：主程序 + ffmpeg/ffprobe + 许可证 + 中文说明 + SHA256SUMS，解压即用 |
+| `OfflineFileTool-v1.5.1.exe` | 约 10 MB | 同上，带版本号的发布名（老用户升级只需换这个文件） |
+| `OfflineFileTool-v1.5.1-full.zip` | 约 169 MB | **完整版**：主程序 + ffmpeg/ffprobe + 许可证 + 中文说明 + SHA256SUMS，解压即用 |
 
 重新生成完整版发布包：
 
