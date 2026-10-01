@@ -1,0 +1,37 @@
+# 构建产物
+/target
+/src-tauri/target
+/src-tauri/gen
+
+# 本地构建缓存（体积巨大，绝不提交）
+/.cargo-neutral
+/.build-tmp
+
+# 分发目录（二进制建议走 GitHub Releases，不提交进仓库）
+/dist
+
+# FFmpeg 二进制（每个 200MB+，绝不提交；用户自行下载放到 ffmpeg/bin）
+/ffmpeg
+
+# 网页拖拽上传用的临时打包目录
+/_upload
+
+# 测试数据
+/src-tauri/target/testdata
+
+# 本机专用 / 一次性脚本（含本机绝对路径或已完成使命，不随仓库分发）
+/dbg_output.txt
+/scripts/finalize.ps1
+/scripts/add-*.js
+/scripts/patch-*.js
+/scripts/strip-*.js
+/scripts/perf-css.js
+/scripts/fix-review-css.js
+/scripts/scan-embedded.js
+/scripts/identify-assets.js
+/scripts/find-i18n-embedded.js
+/scripts/verify-embedded.js
+/scripts/verify-final-ui.js
+
+node_modules
+*.log
